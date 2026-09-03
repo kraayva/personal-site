@@ -7,7 +7,7 @@
 <meta name="description" content="PhD candidate in Energy-Meteorology · machine learning for weather and renewable power forecasting.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Albert+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #F2F5F8;
@@ -57,7 +57,7 @@
     margin:0;
     background:var(--bg);
     color:var(--ink);
-    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+    font-family:"Albert Sans", ui-sans-serif, system-ui, sans-serif;
     font-size:16px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
@@ -207,6 +207,13 @@
     .portrait{width:8.5rem; height:10.5rem;}
   }
 
+  .affil{margin-top:2.1rem;}
+  .uni-logo{height:28px; width:auto; opacity:0.85;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .uni-logo{filter:brightness(0) invert(1); opacity:0.85;}
+  }
+  :root[data-theme="dark"] .uni-logo{filter:brightness(0) invert(1); opacity:0.85;}
+
   /* isobar divider */
   .isobar{
     width:100%; height:34px;
@@ -350,14 +357,17 @@
 <section class="hero">
   <div class="wrap">
     <div>
-      <div class="eyebrow coords">Cologne, Germany · 50.9375°N 6.9603°E</div>
+      <div class="eyebrow coords">Cologne, Germany</div>
       <h1>Jan-Philip Kraayvanger</h1>
       <div class="role">PhD Candidate, Energy-Meteorology · University of Cologne</div>
       <p class="lede">I build machine-learning weather models that forecast renewable power generation — working at the intersection of atmospheric science, data engineering, and ML.</p>
       <div class="cta-row">
-        <a class="btn primary" href="mailto:j.kraayvanger@uni-koeln.de">Email me</a>
+        <a class="btn primary email-link" href="#">Email me</a>
         <a class="btn ghost" href="assets/cv.pdf" download>Download CV</a>
         <a class="btn ghost" href="https://www.linkedin.com/in/kraayvanger" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="affil">
+        <img src="assets/logo.png" alt="University of Cologne" class="uni-logo">
       </div>
     </div>
     <div class="portrait">
@@ -373,7 +383,7 @@
 <section id="about">
   <div class="wrap">
     <div class="eyebrow">About</div>
-    <h2>Field notes</h2>
+    <h2>Background</h2>
     <div class="lede-block">
       <p>I'm a PhD candidate in Energy-Meteorology at the University of Cologne, investigating how machine-learning weather prediction (MLWP) models can forecast renewable power generation. My work sits at the intersection of atmospheric science, data engineering, and machine learning.</p>
       <p>Before this, I built a global database of extreme weather events from CMIP6 climate model data, studied atmospheric chemistry at Forschungszentrum Jülich, and spent a year and a half writing scripts for a science YouTube channel. I started out as a paramedic and worked as a nurse, in geriatric care and later an intensive care unit, before returning to university to study physics.</p>
@@ -383,7 +393,7 @@
 
 <section id="work">
   <div class="wrap">
-    <div class="eyebrow">Experience</div>
+    <div class="eyebrow">Work</div>
     <h2>Work</h2>
     <div class="timeline">
 
@@ -535,7 +545,7 @@
         <p>Open to conversations on weather forecasting, renewable energy, and machine learning for climate applications.</p>
       </div>
       <div class="contact-links">
-        <a href="mailto:j.kraayvanger@uni-koeln.de"><span class="lbl">Email</span> j.kraayvanger@uni-koeln.de</a>
+        <a class="email-link" href="#"><span class="lbl">Email</span> <span class="email-text">(loading…)</span></a>
         <a href="https://www.linkedin.com/in/kraayvanger" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span> /in/kraayvanger</a>
         <a href="assets/cv.pdf" download><span class="lbl">CV</span> Download PDF</a>
       </div>
@@ -550,5 +560,17 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var user = ["j", "kraayvanger"].join(".");
+  var domain = ["uni", "koeln", "de"].join(".");
+  var addr = user + "@" + domain;
+  document.querySelectorAll(".email-link").forEach(function(a){
+    a.href = "mailto:" + addr;
+    var t = a.querySelector(".email-text");
+    if (t) t.textContent = addr;
+  });
+})();
+</script>
 </body>
 </html>
