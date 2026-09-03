@@ -1,1 +1,599 @@
-PLACEHOLDER2
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jan-Philip Kraayvanger</title>
+<meta name="description" content="PhD candidate in Energy-Meteorology · machine learning for weather and renewable power forecasting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F2F5F8;
+    --bg-raised: #FFFFFF;
+    --ink: #16202E;
+    --ink-soft: #4A5A6B;
+    --ink-faint: #7C8B9B;
+    --line: #D6DEE6;
+    --accent: #2F7E71;
+    --accent-ink: #FFFFFF;
+    --accent-2: #C97A2E;
+    --accent-tint: #E4EFEC;
+    --shadow: 0 1px 2px rgba(22,32,46,0.05), 0 8px 24px -12px rgba(22,32,46,0.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #0E161F;
+      --bg-raised: #16202B;
+      --ink: #EAF0F5;
+      --ink-soft: #AEBBC8;
+      --ink-faint: #7C8B9B;
+      --line: #263341;
+      --accent: #5FBCA9;
+      --accent-ink: #0E161F;
+      --accent-2: #E3A25F;
+      --accent-tint: #16302B;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -16px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #0E161F;
+    --bg-raised: #16202B;
+    --ink: #EAF0F5;
+    --ink-soft: #AEBBC8;
+    --ink-faint: #7C8B9B;
+    --line: #263341;
+    --accent: #5FBCA9;
+    --accent-ink: #0E161F;
+    --accent-2: #E3A25F;
+    --accent-tint: #16302B;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px -16px rgba(0,0,0,0.55);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Albert Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:"Albert Sans", ui-sans-serif, system-ui, sans-serif;
+    font-weight:800;
+    letter-spacing:-0.02em;
+    text-wrap:balance;
+    margin:0;
+    color:var(--ink);
+  }
+  .mono{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  .eyebrow{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:0.6em;
+  }
+  .eyebrow::before{
+    content:"";
+    width:1.4em;
+    height:1px;
+    background:var(--accent);
+    display:inline-block;
+  }
+  a{color:var(--accent);}
+  img{max-width:100%; display:block;}
+
+  .wrap{
+    max-width:52rem;
+    margin:0 auto;
+    padding:0 1.75rem;
+  }
+
+  /* ---------- nav ---------- */
+  header.site{
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .navrow{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0.9rem 0;
+  }
+  .navrow .brand{
+    font-family:"Albert Sans", ui-sans-serif, system-ui, sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+  }
+  .navrow nav{
+    display:flex; gap:1.5rem;
+  }
+  .navrow nav a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    font-size:0.88rem;
+    font-family:"IBM Plex Mono", monospace;
+  }
+  .navrow nav a:hover{color:var(--accent);}
+  @media (max-width:560px){
+    .navrow nav{gap:1rem;}
+    .navrow nav a{font-size:0.78rem;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:4.5rem 0 3.5rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:3rem;
+    align-items:center;
+  }
+  .coords{margin-bottom:1.1rem;}
+  .hero h1{
+    font-size:clamp(2.1rem, 5vw, 3.1rem);
+    line-height:1.05;
+  }
+  .hero .role{
+    margin-top:0.55rem;
+    font-size:1.1rem;
+    color:var(--ink-soft);
+    font-weight:500;
+  }
+  .hero p.lede{
+    margin-top:1.15rem;
+    max-width:34rem;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+  }
+  .cta-row{
+    margin-top:1.75rem;
+    display:flex; gap:0.9rem; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:0.5em;
+    padding:0.68rem 1.15rem;
+    border-radius:8px;
+    font-size:0.9rem;
+    font-weight:500;
+    text-decoration:none;
+    border:1px solid transparent;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn.primary{
+    background:var(--accent);
+    color:var(--accent-ink);
+    box-shadow:var(--shadow);
+  }
+  .btn.ghost{
+    background:transparent;
+    border-color:var(--line);
+    color:var(--ink);
+  }
+  .btn.ghost:hover{border-color:var(--accent); color:var(--accent);}
+
+  .portrait{
+    width:11.5rem; height:14.2rem;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    border:1px solid var(--line);
+    background:var(--bg-raised);
+    position:relative;
+  }
+  .portrait img{width:100%; height:100%; object-fit:cover;}
+  .portrait::after{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:10px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.05);
+  }
+  @media (max-width:640px){
+    .hero .wrap{grid-template-columns:1fr; text-align:left;}
+    .portrait{width:8.5rem; height:10.5rem;}
+  }
+
+  .link-quiet{
+    color:inherit;
+    text-decoration:underline;
+    text-decoration-color:var(--line);
+    text-underline-offset:0.15em;
+    transition:text-decoration-color 0.15s ease, color 0.15s ease;
+  }
+  .link-quiet:hover{
+    color:var(--accent);
+    text-decoration-color:var(--accent);
+  }
+
+  /* isobar divider */
+  .isobar{
+    width:100%; height:34px;
+    display:block;
+    color:var(--line);
+    margin:0.5rem 0;
+  }
+
+  section{padding:3.2rem 0;}
+  section + section{border-top:1px solid var(--line);}
+  section > .wrap > .eyebrow{margin-bottom:0.9rem;}
+  section h2{font-size:1.55rem; margin-bottom:1.4rem;}
+
+  .lede-block p{color:var(--ink-soft); max-width:40rem;}
+  .lede-block p + p{margin-top:1rem;}
+
+  /* ---------- timeline ---------- */
+  .timeline{
+    display:flex; flex-direction:column;
+    border-left:1px solid var(--line);
+    margin-left:0.35rem;
+  }
+  .titem{
+    position:relative;
+    padding:0 0 1.7rem 1.6rem;
+  }
+  .titem:last-child{padding-bottom:0;}
+  .titem::before{
+    content:"";
+    position:absolute; left:-5px; top:0.35rem;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--accent);
+  }
+  .titem.current::before{
+    background:var(--accent);
+  }
+  .titem .when{
+    font-size:0.78rem;
+    color:var(--accent);
+    display:block;
+    margin-bottom:0.2rem;
+  }
+  .titem .what{
+    font-weight:600;
+    font-size:1rem;
+  }
+  .titem .where{
+    color:var(--ink-soft);
+    font-size:0.92rem;
+    margin-top:0.15rem;
+  }
+  .titem .desc{
+    color:var(--ink-faint);
+    font-size:0.92rem;
+    margin-top:0.35rem;
+    max-width:36rem;
+  }
+
+  /* ---------- skills ---------- */
+  .skillgroup{margin-bottom:1.6rem;}
+  .skillgroup:last-child{margin-bottom:0;}
+  .skillgroup h3{
+    font-family:"IBM Plex Mono", monospace;
+    font-weight:500;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:0.7rem;
+  }
+  .chips{display:flex; flex-wrap:wrap; gap:0.55rem;}
+  .chip{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:0.82rem;
+    padding:0.35rem 0.75rem;
+    border-radius:999px;
+    background:var(--accent-tint);
+    color:var(--ink);
+    border:1px solid var(--line);
+  }
+
+  /* ---------- contact ---------- */
+  .contact-card{
+    background:var(--bg-raised);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:2.1rem;
+    box-shadow:var(--shadow);
+    display:flex; flex-wrap:wrap;
+    align-items:center; justify-content:space-between;
+    gap:1.5rem;
+  }
+  .contact-card .ctext h2{font-size:1.3rem; margin-bottom:0.4rem;}
+  .contact-card .ctext p{color:var(--ink-soft); margin:0; max-width:26rem;}
+  .contact-links{display:flex; flex-direction:column; gap:0.6rem;}
+  .contact-links a{
+    text-decoration:none;
+    color:var(--ink);
+    font-size:0.92rem;
+    display:flex; align-items:center; gap:0.5em;
+  }
+  .contact-links a:hover{color:var(--accent);}
+  .contact-links .lbl{
+    font-family:"IBM Plex Mono", monospace;
+    color:var(--ink-faint);
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    width:4.4rem;
+    display:inline-block;
+  }
+  @media (max-width:560px){
+    .contact-card{padding:1.5rem;}
+  }
+
+  footer{
+    padding:2.2rem 0 3rem;
+    color:var(--ink-faint);
+    font-size:0.82rem;
+    font-family:"IBM Plex Mono", monospace;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap navrow">
+    <div class="brand">Jan-Philip Kraayvanger</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow coords">Cologne, Germany</div>
+      <h1>Jan-Philip Kraayvanger</h1>
+      <div class="role">PhD Candidate, Energy-Meteorology · <a class="link-quiet" href="https://geomet.uni-koeln.de/en/" target="_blank" rel="noopener">University of Cologne</a></div>
+      <p class="lede" id="hero-lede">I build machine-learning weather models that forecast renewable power generation — working at the intersection of atmospheric science, data engineering, and ML.</p>
+      <div class="cta-row">
+        <a class="btn primary email-link" href="#">Email me</a>
+        <a class="btn ghost" href="assets/cv.pdf" download>Download CV</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/kraayvanger" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="portrait">
+      <img src="assets/photo.jpg" alt="Portrait of Jan-Philip Kraayvanger" width="836" height="1304">
+    </div>
+  </div>
+  <svg class="isobar wrap" viewBox="0 0 800 34" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 20 C 150 4, 300 32, 450 16 S 700 4, 800 18" fill="none" stroke="currentColor" stroke-width="1"/>
+    <path d="M0 28 C 150 14, 300 30, 450 22 S 700 12, 800 26" fill="none" stroke="currentColor" stroke-width="1" opacity="0.55"/>
+  </svg>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h2>Background</h2>
+    <div class="lede-block" id="about-text">
+      <p>I'm a PhD candidate in Energy-Meteorology at the University of Cologne, investigating how machine-learning weather prediction (MLWP) models can forecast renewable power generation. My work sits at the intersection of atmospheric science, data engineering, and machine learning.</p>
+      <p>Before this, I built a global database of extreme weather events from CMIP6 climate model data, studied atmospheric chemistry at Forschungszentrum Jülich, and spent a year and a half writing scripts for a science YouTube channel. I started out as a paramedic and worked as a nurse, in geriatric care and later an intensive care unit, before going to university to study physics.</p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow">Work</div>
+    <h2>Work</h2>
+    <div class="timeline">
+
+      <div class="titem current">
+        <span class="when mono">09/2025 — present</span>
+        <div class="what">Doctoral Researcher — Solar Energy Forecasting</div>
+        <div class="where"><a class="link-quiet" href="https://geomet.uni-koeln.de/en/" target="_blank" rel="noopener">University of Cologne</a> · full-time</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">04/2025 — 08/2025</span>
+        <div class="what">Research Assistant — Atmospheric Modeling</div>
+        <div class="where">University of Cologne · part-time</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">10/2024 — 04/2025</span>
+        <div class="what">Tutorial Instructor — Simulation &amp; Modeling</div>
+        <div class="where">University of Cologne</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">03/2024 — 03/2025</span>
+        <div class="what">Research Assistant, Atmospheric Chemistry Modeling</div>
+        <div class="where"><a class="link-quiet" href="https://www.fz-juelich.de/en/ice/ice-3" target="_blank" rel="noopener">Forschungszentrum Jülich</a></div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">10/2023 — 09/2024</span>
+        <div class="what">Student Assistant, Data Science</div>
+        <div class="where"><a class="link-quiet" href="https://meteocloud.de/" target="_blank" rel="noopener">MeteoCloud GmbH</a></div>
+        <div class="desc">Built a global database of extreme weather events from CMIP6 modeling data.</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">04/2022 — 09/2023</span>
+        <div class="what">Scriptwriter</div>
+        <div class="where"><a class="link-quiet" href="https://www.youtube.com/@BreakingLab" target="_blank" rel="noopener">"Breaking Lab"</a> (I&amp;U TV) — a science YouTube channel</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">09/2018 — 09/2021</span>
+        <div class="what">Student Assistant, Teaching Evaluation Unit</div>
+        <div class="where">University of Cologne</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">11/2014 — 11/2016</span>
+        <div class="what">Geriatric Nurse</div>
+        <div class="where">Altenheim Maria Hilf · part-time</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">10/2010 — 10/2013</span>
+        <div class="what">Nurse, Intensive Care Unit</div>
+        <div class="where">Krankenhaus der Augustinerinnen Köln · part-time</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="eyebrow">Education</div>
+    <h2>Education</h2>
+    <div class="timeline">
+
+      <div class="titem current">
+        <span class="when mono">09/2025 — present</span>
+        <div class="what">PhD Candidate, Energy-Meteorology</div>
+        <div class="where">University of Cologne</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">10/2022 — 08/2025</span>
+        <div class="what">M.Sc. Computational Sciences</div>
+        <div class="where">University of Cologne</div>
+        <div class="desc">Interdisciplinary program combining computer science and natural sciences — data analysis, machine learning, and simulation methods. Thesis in atmospheric chemistry modeling.</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">11/2021 — 07/2022</span>
+        <div class="what">IBM Data Science Professional Certificate</div>
+        <div class="where">Coursera</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">10/2015 — 09/2021</span>
+        <div class="what">B.Sc. Physics</div>
+        <div class="where">University of Cologne · part-time</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">10/2010 — 04/2015</span>
+        <div class="what">German Abitur (High school diploma)</div>
+        <div class="where">ILS — Correspondence School, distance learning</div>
+      </div>
+
+      <div class="titem">
+        <span class="when mono">05/2010 — 09/2010</span>
+        <div class="what">Paramedic Seminar</div>
+        <div class="where">Johanniter Cologne</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">Skills</div>
+    <h2>Instruments &amp; methods</h2>
+
+    <div class="skillgroup">
+      <h3>Domain</h3>
+      <div class="chips">
+        <span class="chip">Machine Learning</span>
+        <span class="chip">Weather Prediction (MLWP)</span>
+        <span class="chip">Atmospheric Chemistry Modeling</span>
+        <span class="chip">Renewable Energy Forecasting</span>
+        <span class="chip">Data Analysis</span>
+        <span class="chip">Data Integration</span>
+      </div>
+    </div>
+
+    <div class="skillgroup">
+      <h3>Languages &amp; Tools</h3>
+      <div class="chips">
+        <span class="chip">Python</span>
+        <span class="chip">Julia</span>
+        <span class="chip">Shell Scripting</span>
+        <span class="chip">Git</span>
+        <span class="chip">LaTeX</span>
+        <span class="chip">Jupyter &amp; VS Code</span>
+        <span class="chip">Copilot, Claude Code</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <div class="contact-card">
+      <div class="ctext">
+        <h2>Get in touch</h2>
+        <p>Open to conversations on weather forecasting, renewable energy, and machine learning for atmospheric science.</p>
+      </div>
+      <div class="contact-links">
+        <a class="email-link" href="#"><span class="lbl">Email</span> <span class="email-text">(loading…)</span></a>
+        <a href="https://www.linkedin.com/in/kraayvanger" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span> /in/kraayvanger</a>
+        <a href="assets/cv.pdf" download><span class="lbl">CV</span> Download PDF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 Jan-Philip Kraayvanger</span>
+    <span>Cologne, Germany</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var user = ["j", "kraayvanger"].join(".");
+  var domain = ["uni", "koeln", "de"].join(".");
+  var addr = user + "@" + domain;
+  document.querySelectorAll(".email-link").forEach(function(a){
+    a.href = "mailto:" + addr;
+    var t = a.querySelector(".email-text");
+    if (t) t.textContent = addr;
+  });
+})();
+
+// Load editable copy from content/*.txt so the text can be edited without
+// touching the HTML. If the fetch fails (e.g. opened as a local file),
+// the text already in the HTML above is used as a fallback.
+(function(){
+  fetch("content/hero.txt").then(function(r){ return r.ok ? r.text() : null; }).then(function(t){
+    if (!t) return;
+    var el = document.getElementById("hero-lede");
+    if (el) el.textContent = t.trim();
+  }).catch(function(){});
+
+  fetch("content/about.txt").then(function(r){ return r.ok ? r.text() : null; }).then(function(t){
+    if (!t) return;
+    var paras = t.trim().split(/\n\s*\n/);
+    var el = document.getElementById("about-text");
+    if (el) el.innerHTML = paras.map(function(p){
+      var div = document.createElement("div");
+      div.textContent = p.trim();
+      return "<p>" + div.innerHTML + "</p>";
+    }).join("");
+  }).catch(function(){});
+})();
+</script>
+</body>
+</html>
