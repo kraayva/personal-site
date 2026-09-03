@@ -1,1 +1,1 @@
-As a PhD Candidate in Energy-Meteorology I am investigating how to use machine learining based weather forecasts to predict renewable enery generation
+I am using state-of-the-art date science techniques to investigate how to predict renewable enery generation from machine learining based weather forecasts
