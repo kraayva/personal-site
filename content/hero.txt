@@ -1,1 +1,1 @@
-PhD Candidate in Energy-Meteorology with expertise in machine learning, atmospheric modeling and data integration. Currently investigating the capability of MLWP models to predict renewable power generation.
+PhD Candidate in Energy-Meteorology with expertise in machine learning, atmospheric modeling and data integration. Currently investigating how to use machine learining based weather forecasts to predict renewable enery generation
