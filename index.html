@@ -563,9 +563,13 @@
 
 <script>
 (function(){
-  var user = ["j", "kraayvanger"].join(".");
-  var domain = ["uni", "koeln", "de"].join(".");
-  var addr = user + "@" + domain;
+  // Address is stored as character codes rather than plain text so it
+  // doesn't appear as a readable string anywhere in the page source —
+  // this defeats simple regex/text scrapers. It's still fully visible
+  // to anything that executes JavaScript and reads the rendered link,
+  // since the address has to end up clickable for real visitors.
+  var codes = [106,46,107,114,97,97,121,118,97,110,103,101,114,64,117,110,105,46,107,111,101,108,110,46,100,101];
+  var addr = codes.map(function(c){ return String.fromCharCode(c); }).join("");
   document.querySelectorAll(".email-link").forEach(function(a){
     a.href = "mailto:" + addr;
     var t = a.querySelector(".email-text");
