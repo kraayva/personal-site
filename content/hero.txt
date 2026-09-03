@@ -1,1 +1,1 @@
-I build machine-learning weather models that forecast renewable power generation — working at the intersection of atmospheric science, data engineering, and ML.
+PhD Candidate in Energy-Meteorology with expertise in machine learning, atmospheric chemistry modeling and data integration. Currently investigating the capability of MLWP models to predict renewable power generation.
