@@ -1,1 +1,1 @@
-PhD Candidate in Energy-Meteorology with expertise in machine learning, atmospheric modeling and data integration. Currently investigating how to use machine learining based weather forecasts to predict renewable enery generation
+As a PhD Candidate in Energy-Meteorology I am investigating how to use machine learining based weather forecasts to predict renewable enery generation
