@@ -1,1 +1,1 @@
-I am using state-of-the-art date science techniques to investigate how to predict renewable enery generation from machine learining based weather forecasts
+I build models that forecast renewable energy generation from machine learning based weather predictions
