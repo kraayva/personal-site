@@ -207,12 +207,17 @@
     .portrait{width:8.5rem; height:10.5rem;}
   }
 
-  .affil{margin-top:2.1rem;}
-  .uni-logo{height:28px; width:auto; opacity:0.85;}
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]) .uni-logo{filter:brightness(0) invert(1); opacity:0.85;}
+  .link-quiet{
+    color:inherit;
+    text-decoration:underline;
+    text-decoration-color:var(--line);
+    text-underline-offset:0.15em;
+    transition:text-decoration-color 0.15s ease, color 0.15s ease;
   }
-  :root[data-theme="dark"] .uni-logo{filter:brightness(0) invert(1); opacity:0.85;}
+  .link-quiet:hover{
+    color:var(--accent);
+    text-decoration-color:var(--accent);
+  }
 
   /* isobar divider */
   .isobar{
@@ -359,15 +364,12 @@
     <div>
       <div class="eyebrow coords">Cologne, Germany</div>
       <h1>Jan-Philip Kraayvanger</h1>
-      <div class="role">PhD Candidate, Energy-Meteorology · University of Cologne</div>
+      <div class="role">PhD Candidate, Energy-Meteorology · <a class="link-quiet" href="https://geomet.uni-koeln.de/en/" target="_blank" rel="noopener">University of Cologne</a></div>
       <p class="lede">I build machine-learning weather models that forecast renewable power generation — working at the intersection of atmospheric science, data engineering, and ML.</p>
       <div class="cta-row">
         <a class="btn primary email-link" href="#">Email me</a>
         <a class="btn ghost" href="assets/cv.pdf" download>Download CV</a>
         <a class="btn ghost" href="https://www.linkedin.com/in/kraayvanger" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-      <div class="affil">
-        <img src="assets/logo.png" alt="University of Cologne" class="uni-logo">
       </div>
     </div>
     <div class="portrait">
@@ -400,7 +402,7 @@
       <div class="titem current">
         <span class="when mono">09/2025 — present</span>
         <div class="what">Doctoral Researcher — Weather Forecasting for the Energy Sector</div>
-        <div class="where">University of Cologne · full-time</div>
+        <div class="where"><a class="link-quiet" href="https://geomet.uni-koeln.de/en/" target="_blank" rel="noopener">University of Cologne</a> · full-time</div>
       </div>
 
       <div class="titem">
@@ -431,7 +433,7 @@
       <div class="titem">
         <span class="when mono">04/2022 — 09/2023</span>
         <div class="what">Scriptwriter</div>
-        <div class="where">"Breaking Lab" (I&amp;U TV) — a science YouTube channel</div>
+        <div class="where"><a class="link-quiet" href="https://www.youtube.com/@BreakingLab" target="_blank" rel="noopener">"Breaking Lab"</a> (I&amp;U TV) — a science YouTube channel</div>
       </div>
 
       <div class="titem">
