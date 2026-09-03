@@ -1,0 +1,1 @@
+I build machine-learning weather models that forecast renewable power generation — working at the intersection of atmospheric science, data engineering, and ML.
