@@ -562,7 +562,7 @@
   document.querySelectorAll(".email-link").forEach(function(a){
     a.href = "mailto:" + addr;
     var t = a.querySelector(".email-text");
-    if (t) t.textContent = addr;
+    if (t) t.textContent = addr.replace("@", " [at] ");
   });
 })();
 
